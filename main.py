@@ -3,7 +3,9 @@ import csv
 from google.cloud import storage
 import pymysql
 import os
+from flask import Flask
 
+app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = 'data-on-cloud-431403-933827d894b0.json'
 
 # Configuration
@@ -58,7 +60,8 @@ def upload_to_gcs(bucket_name, file_name, data):
     blob = bucket.blob(file_name)
     blob.upload_from_string(json.dumps(data, indent=2), content_type='application/json')
 
-def main():
+@app.route('/')
+def run_pipeline():
     print(f"Attempting to download {GCS_JSON_FILE_NAME} from bucket {GCS_BUCKET_NAME}")
 
     # Read data from GCS (JSON and CSV)
@@ -75,6 +78,9 @@ def main():
     # Upload transformed data to GCS
     upload_to_gcs(GCS_BUCKET_NAME, GCS_OUTPUT_JSON_FILE_NAME, transformed_data)
     #print('success')
+    return "Data pipeline executed successfully."
+
 
 if __name__ == "__main__":
-    main()
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
