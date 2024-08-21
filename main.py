@@ -45,10 +45,10 @@ def read_from_sql():
     connection.close()
     return rows
 
-def transform_to_json("""sql_data,""" json_data, csv_data):
+def transform_to_json(sql_data, json_data, csv_data):
     """Transforms SQL, JSON, and CSV data into a single JSON object."""
     combined_data = {
-        #'sql_data': sql_data,
+        'sql_data': sql_data,
         'json_data': json.loads(json_data),
         'csv_data': list(csv.DictReader(csv_data.splitlines()))
     }
