@@ -74,7 +74,7 @@ def main():
 
     # Upload transformed data to GCS
     upload_to_gcs(GCS_BUCKET_NAME, GCS_OUTPUT_JSON_FILE_NAME, transformed_data)
-    print('success')
+    #print('success')
 
 if __name__ == "__main__":
     main()
