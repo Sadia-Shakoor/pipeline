@@ -29,9 +29,9 @@ def read_from_gcs(bucket_name, file_name):
     content = blob.download_as_text()
     return content
 
-#def read_from_sql():
+def read_from_sql():
     """Reads data from Cloud SQL."""
-    """connection = pymysql.connect(
+    connection = pymysql.connect(
         user=DB_USER,
         password=DB_PASSWORD,
         database=DB_NAME,
@@ -43,7 +43,7 @@ def read_from_gcs(bucket_name, file_name):
         rows = cursor.fetchall()
 
     connection.close()
-    return rows"""
+    return rows
 
 def transform_to_json("""sql_data,""" json_data, csv_data):
     """Transforms SQL, JSON, and CSV data into a single JSON object."""
@@ -69,11 +69,12 @@ def run_pipeline():
     csv_data = read_from_gcs(GCS_BUCKET_NAME, GCS_CSV_FILE_NAME)
 
     # Read data from Cloud SQL
+    sql_data= "sql"
     #sql_data = read_from_sql()
     #print(sql_data)
 
     # Transform data
-    transformed_data = transform_to_json( json_data, csv_data)
+    transformed_data = transform_to_json(sql_data, json_data, csv_data)
 
     # Upload transformed data to GCS
     upload_to_gcs(GCS_BUCKET_NAME, GCS_OUTPUT_JSON_FILE_NAME, transformed_data)
