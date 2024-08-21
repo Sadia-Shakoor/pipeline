@@ -79,9 +79,10 @@ def run_pipeline():
     # Upload transformed data to GCS
     upload_to_gcs(GCS_BUCKET_NAME, GCS_OUTPUT_JSON_FILE_NAME, transformed_data)
     #print('success')
-    return "Data pipeline executed successfully."
+    return f"Data pipeline executed successfully in {GCS_OUTPUT_JSON_FILE_NAME}."
 
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
+    
