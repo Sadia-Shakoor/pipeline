@@ -15,7 +15,7 @@ DB_NAME = 'employeedb'
 GCS_BUCKET_NAME = 'first_data_bkt'
 GCS_JSON_FILE_NAME = 'data.json'
 GCS_CSV_FILE_NAME = 'data.csv'
-GCS_OUTPUT_JSON_FILE_NAME = 'output_data.json'
+GCS_OUTPUT_JSON_FILE_NAME = 'output_data1.json'
 
 # Initialize GCS client
 storage_client = storage.Client()
